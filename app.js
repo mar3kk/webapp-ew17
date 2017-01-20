@@ -5,25 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
+const config = require('./config');
+const ds_helper = require('./helpers/ds_helper');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+const DSRoutes = require('./routes/ds_routes');
+app.use('/notifications', DSRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,3 +37,11 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Colour', config.host + '/notifications/color_changed')
+    .then((response) => {
+        console.log("Succesfully subscribed to IPSO Colour object");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
