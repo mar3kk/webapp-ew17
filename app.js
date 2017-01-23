@@ -57,3 +57,12 @@ ds_helper.subscribeToObservation(config.color_detector_client_name, 3200, 0, 'Di
     .catch((err) => {
         console.log(err);
     });
+
+setInterval(writeConveyorStateMeasurement, 1000);
+
+function writeConveyorStateMeasurement() {
+    db_helper.getLastConveyorState()
+        .then((response) => {
+            db_helper.writeConveyorStateMeasurement(response);
+        });
+}

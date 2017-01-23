@@ -23,4 +23,10 @@ exports.onColorChanged = function (req, res) {
 
 exports.onConveyorStateChanged = function (req, res) {
     let conveyorState = req.body.Items[0].Value.DigitalInputState;
+
+    db_helper.setLastConveyorState(conveyorState)
+        .catch((err) => {
+            console.error(err);
+        });
 };
+
