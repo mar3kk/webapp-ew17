@@ -11,6 +11,7 @@
     "creator-js-client": "git://github.com/CreatorDev/creator-js-client.git",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "influx": "^5.0.0-alpha.4",
     "morgan": "~1.7.0",
     "pug": "~2.0.0-beta6",
     "serve-favicon": "~2.3.0"
