@@ -10,6 +10,8 @@ const config = require('./config');
 const ds_helper = require('./helpers/ds_helper');
 const db_helper = require('./helpers/db_helper');
 
+app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,6 +41,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+// subscribe to color observation
 ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Colour', config.host + '/notifications/color_changed')
     .then((response) => {
         console.log("Succesfully subscribed to IPSO Colour object");
@@ -47,4 +50,10 @@ ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Co
         console.log(err);
     });
 
-db_helper.writeColor("red");
+ds_helper.subscribeToObservation(config.color_detector_client_name, 3200, 0, 'DigitalInputState', config.host + '/notifications/conveyor_state_changed')
+    .then((response) => {
+        console.log("Succesfully subscribed to IPSO digital Input object");
+    })
+    .catch((err) => {
+        console.log(err);
+    });

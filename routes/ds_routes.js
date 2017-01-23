@@ -9,5 +9,6 @@ router.post('/*', function(req, res, next) {
 });
 
 router.post('/color_changed', dsController.onColorChanged);
+router.post('/conveyor_state_changed', dsController.onConveyorStateChanged);
 
 module.exports = router;

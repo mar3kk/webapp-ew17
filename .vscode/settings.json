@@ -2,4 +2,6 @@
     "jshint.options": {
         "esversion" : 6
     }
+,
+"vsicons.presets.angular": true
 }
