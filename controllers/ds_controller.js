@@ -92,5 +92,5 @@ exports.clientConnected = function (req, res) {
         .catch(error => {
             console.error(error);
         });
-}
+};
 

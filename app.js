@@ -58,7 +58,10 @@ ds_helper.subscribeToObservation(config.conveyor_controller_client_name, 3200, 0
         console.log(err);
     });
 
-synchronization_helper.trySynchronizeConveyorState();
+synchronization_helper.trySynchronizeConveyorState()
+    .then(() => {
+        setInterval(writeConveyorStateMeasurement, 1000);
+    });
 
 ds_helper.subscribeToClientConnectedEvent(config.host + "/notifications/client_connected")
     .then((response) => {
@@ -69,7 +72,7 @@ ds_helper.subscribeToClientConnectedEvent(config.host + "/notifications/client_c
     });
 
 
-setInterval(writeConveyorStateMeasurement, 1000);
+
 
 function writeConveyorStateMeasurement() {
     db_helper.getLastConveyorState()
