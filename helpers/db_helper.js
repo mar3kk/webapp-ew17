@@ -2,7 +2,7 @@ const Influx = require('influx');
 const config = require('../config');
 
 const influx = new Influx.InfluxDB({
-    host: 'localhost',
+    host: config.database.uri,
     database: config.database.name,
     schema: [
         {

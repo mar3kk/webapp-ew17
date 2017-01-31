@@ -14,6 +14,6 @@ module.exports = {
     // name of the client responsible for controlling conveyor belt
     conveyor_controller_client_name: "ColorDetector",
     // your host on which app is running, necessary to set subscription uri
-    host: "http://f2c73f4b.ngrok.io",
+    host: "https://ngrok_URL",
     allowed_colors: ["none", "red", "green", "blue", "yellow"]
 };
