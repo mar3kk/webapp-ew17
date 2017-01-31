@@ -8,6 +8,7 @@ var app = express();
 const config = require('./config');
 const ds_helper = require('./helpers/ds_helper');
 const db_helper = require('./helpers/db_helper');
+const synchronization_helper = require('./helpers/synchronization_helper');
 
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
@@ -56,6 +57,17 @@ ds_helper.subscribeToObservation(config.conveyor_controller_client_name, 3200, 0
     .catch((err) => {
         console.log(err);
     });
+
+synchronization_helper.trySynchronizeConveyorState();
+
+ds_helper.subscribeToClientConnectedEvent(config.host + "/notifications/client_connected")
+    .then((response) => {
+        console.log("Successfully subscribed to client connected event");
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+
 
 setInterval(writeConveyorStateMeasurement, 1000);
 

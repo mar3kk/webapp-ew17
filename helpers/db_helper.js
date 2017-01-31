@@ -44,6 +44,7 @@ influx.createDatabase(config.database.name)
     });
 
 
+
 exports.writeColorMeasurement = function (color) {
     influx.writePoints([
         {
@@ -66,7 +67,7 @@ exports.writeConveyorStateMeasurement = function (state) {
         }
     ])
     .then(() => {
-        console.log("saved");
+        console.log("saved conveyor_state : %s", state ? 1 : 0);
     })
     .catch((err) => {
         console.error(err);
