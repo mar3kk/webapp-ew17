@@ -121,7 +121,7 @@
                   },
                   {
                     "params": [],
-                    "type": "integral"
+                    "type": "sum"
                   }
                 ]
               ],
@@ -425,6 +425,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Embedded world 2017",
-  "version": 17
+  "title": "Embedded world 20171",
+  "version": 0
 }
