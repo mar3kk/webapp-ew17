@@ -49,7 +49,7 @@ ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Co
         console.log(err);
     });
 
-ds_helper.subscribeToObservation(config.color_detector_client_name, 3200, 0, 'DigitalInputState', config.host + '/notifications/conveyor_state_changed')
+ds_helper.subscribeToObservation(config.conveyor_controller_client_name, 3200, 0, 'DigitalInputState', config.host + '/notifications/conveyor_state_changed')
     .then((response) => {
         console.log("Succesfully subscribed to IPSO digital Input object");
     })
