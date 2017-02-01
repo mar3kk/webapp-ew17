@@ -1,5 +1,5 @@
 const config = require("../config");
-const creator = require("creator-js-client")(config.device_server.access_key, config.device_server.access_secret);
+const creator = require("creator-js-client")(config.device_server.access_key, config.device_server.access_secret, { host: config.device_server.url });
 const bluebird = require("bluebird");
 
 exports.subscribeToObservation = function(clientName, objectID, instanceID, property, url, callback) {
