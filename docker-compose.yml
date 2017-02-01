@@ -5,6 +5,8 @@ services:
         container_name: ewdemo-webapp
         ports:
             - 3001:3001
+        environment:
+            - NODE_ENV=production
         depends_on:
             - influxdb
             - grafana

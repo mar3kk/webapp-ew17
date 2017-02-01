@@ -1,8 +1,14 @@
 const Influx = require('influx');
 const config = require('../config');
 
+var dbURI = config.database.uri;
+// Enable production mode to use prod con string
+if (process.env.NODE_ENV === 'production') {
+    dbURI = 'influxdb:8086';
+}
+
 const influx = new Influx.InfluxDB({
-    host: config.database.uri,
+    host: dbURI,
     database: config.database.name,
     schema: [
         {

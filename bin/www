@@ -88,3 +88,17 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+// Verify process.env.NODE_ENV
+if (process.env.NODE_ENV === 'production') {
+  console.log('Runing in mode: ' + process.env.NODE_ENV);
+  console.log('DB URI -> influxdb:8086');
+  
+}else{
+  console.log('Runing in mode: ' + process.env.NODE_ENV);
+  console.log('DB URI -> localhost:8086'); 
+}
+
+// Prints the port
+console.log('Express server listening on port: ' + server.address().port);
+console.log('Press Ctrl+c to quit');
