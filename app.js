@@ -71,9 +71,6 @@ ds_helper.subscribeToClientConnectedEvent(config.host + "/notifications/client_c
         console.error(err);
     });
 
-
-
-
 function writeConveyorStateMeasurement() {
     db_helper.getLastConveyorState()
         .then((response) => {
