@@ -15,8 +15,8 @@ exports.onColorChanged = function (req, res) {
 
     let allowedColor = false;
 
-    config.allowed_colors.every(function (element) {
-        if (colour == element) {
+    config.allowed_colors.forEach(function (element) {
+        if (colour === element) {
             allowedColor = true;
             return false;
         }
@@ -24,6 +24,7 @@ exports.onColorChanged = function (req, res) {
 
     if (allowedColor === false) {
         console.error("Invalid color : %s", colour);
+        return;
     }
 
     db_helper.getLastColor()
@@ -33,7 +34,8 @@ exports.onColorChanged = function (req, res) {
             } else {
                 return bluebird.all([
                     db_helper.writeColorMeasurement(colour),
-                    db_helper.setLastColor(colour)
+                    db_helper.setLastColor(colour),
+                    ds_helper.writeColour(colour)
                 ]);
             }
         })
@@ -97,6 +99,15 @@ exports.clientConnected = function (req, res) {
                         console.log(err);
                     });
                 //synchronization_helper.trySynchronizeConveyorState();
+            }
+            if (c.Name === config.color_detector_client_name) {
+                ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Colour', config.host + '/notifications/color_changed')
+                    .then((response) => {
+                        console.log("Succesfully subscribed to IPSO colour object");
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
         })
         .catch(error => {

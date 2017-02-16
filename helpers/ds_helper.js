@@ -77,10 +77,43 @@ exports.getPropertyValue = function (clientName, objectID, instanceID, property,
     }
 };
 
+
+exports.setPropertyValue = function (clientName, objectID, instanceID, property, value, callback) {
+    const promise = creator.request(
+        {
+            steps: ['clients', {Name: clientName}, 'objecttypes', {ObjectTypeID: objectID.toString()}, 'instances', {InstanceID: instanceID.toString()}],
+            method: 'PUT',
+            data: {
+                'Colour' : value
+            },
+            nocache : true
+        })
+        .then((response) => {
+            if (response.statusCode == 200) {
+                return response.body[property];
+            } else {
+                return null;
+            }
+        });
+    if (callback) {
+        return promise.nodeify(callback);
+    } else {
+        return promise;
+    }
+};
+
 exports.getConveyorState = function () {
     return this.getPropertyValue(config.conveyor_controller_client_name, 3200, 0, 'DigitalInputState');
 };
 
 exports.getClients = function () {
     return creator.request({ steps: ['clients'] });
+};
+
+exports.writeColour = function (colour) {
+    console.log("Writing colour %s to bulb controller", colour);
+    this.setPropertyValue(config.bulb_controller_client_name, 3311, 0, "Colour", colour)
+        .catch((error) => {
+            console.error("failed to write colour %s to bulb controller. %s", colour, error);
+        });
 };
