@@ -5,8 +5,9 @@ const bluebird = require('bluebird');
 const synchronization_helper = require('../helpers/synchronization_helper');
 
 exports.onColorChanged = function (req, res) {
+    console.log("Number of items in callback : %d", req.body.Items.length);
     let colour = req.body.Items[0].Value.Colour;
-
+    colour = colour.trim();
     if (colour === "none") {
         console.info("color " + colour);
         db_helper.setLastColor(colour);
