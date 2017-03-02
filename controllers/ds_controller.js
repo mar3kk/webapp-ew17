@@ -60,9 +60,7 @@ exports.clientConnected = function (req, res) {
         return;
     }
     var items = req.body.Items[0];
-    var subscription = items.Links.filter(function (element) {
-        return element.rel === "client";
-    });
+    var subscription = items.Links.filter(element => {return element.rel === "client";});
     if (subscription.length === 0) {
         console.error("[onClientUpdated] Could not find client url!");
         return;
