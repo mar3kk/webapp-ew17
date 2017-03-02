@@ -2,7 +2,7 @@ version: '2'
 services:
     mywebapp:
         build: .
-        container_name: ewdemo-webapp
+        container_name: ewdemo_webapp
         ports:
             - 3001:3001
         environment:

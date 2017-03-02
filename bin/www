@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('ewdemo-webapp:server');
+var debug = require('debug')('ewdemo_webapp:server');
 var http = require('http');
 
 /**

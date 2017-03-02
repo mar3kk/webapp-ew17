@@ -9,7 +9,7 @@ run: all
 
 DOCKER_ORGANISATION:=creatordev
 DOCKER_SHELL:=bash
-CONTAINER_NAME:=ewdemo-webapp
+CONTAINER_NAME:=ewdemo_webapp
 DOCKER_BUILDARG_BUILDDATE:=
 
 include docker.mk
