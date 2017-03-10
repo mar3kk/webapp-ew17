@@ -84,7 +84,7 @@ exports.setPropertyValue = function (clientName, objectID, instanceID, property,
             steps: ['clients', {Name: clientName}, 'objecttypes', {ObjectTypeID: objectID.toString()}, 'instances', {InstanceID: instanceID.toString()}],
             method: 'PUT',
             data: {
-                'Colour' : value
+                [property]: value
             },
             nocache : true
         })
