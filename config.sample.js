@@ -43,8 +43,11 @@ module.exports = {
     // name of the client responsible for detecting blocks colours
     color_detector_client_name: "ColorDetector",
     // name of the client responsible for controlling conveyor belt
-    conveyor_controller_client_name: "ColorDetector",
+    conveyor_controller_client_name: "ConveyorController",
+    // name of the client responsible for controlling the bt bulb
+    bulb_controller_client_name : "Bulbcontroller",
+
     // your host on which app is running, necessary to set subscription uri
     host: "https://ngrok_URL",
-    allowed_colors: ["none", "red", "green", "blue", "yellow"]
+    aallowed_colors: ["none", "red", "green", "blue", "yellow", "orange", "purple"]
 };
