@@ -8,8 +8,8 @@ exports.onColorChanged = function (req, res) {
     console.log("Number of items in callback : %d", req.body.Items.length);
     let colour = req.body.Items[0].Value.Colour;
     colour = colour.trim();
+    console.info("got color : " + colour);
     if (colour === "none") {
-        console.info("color " + colour);
         db_helper.setLastColor(colour);
         return;
     }
@@ -90,16 +90,6 @@ exports.clientConnected = function (req, res) {
                     });
                 synchronization_helper.trySynchronizeConveyorState();
             } else if (c.Name === config.color_detector_client_name) {
-                ds_helper.subscribeToObservation(config.color_detector_client_name, 5706, 0, 'Color', config.host + '/notifications/color_changed')
-                    .then((response) => {
-                        console.log("Succesfully subscribed to IPSO Color object");
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-                //synchronization_helper.trySynchronizeConveyorState();
-            }
-            if (c.Name === config.color_detector_client_name) {
                 ds_helper.subscribeToObservation(config.color_detector_client_name, 3335, 0, 'Colour', config.host + '/notifications/color_changed')
                     .then((response) => {
                         console.log("Succesfully subscribed to IPSO colour object");
